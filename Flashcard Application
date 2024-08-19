@@ -1,0 +1,63 @@
+import random
+
+class Flashcard:
+    def _init_(self, question, answer):
+        self.question = question
+        self.answer = answer
+
+class FlashcardManager:
+    def _init_(self):
+        self.flashcards = []
+
+    def add_flashcard(self, question, answer):
+        self.flashcards.append(Flashcard(question, answer))
+
+    def view_flashcards(self):
+        for i, flashcard in enumerate(self.flashcards, start=1):
+            print(f"Flashcard {i}:")
+            print(f"Question: {flashcard.question}")
+            print(f"Answer: {flashcard.answer}")
+            print()
+
+    def quiz(self):
+        if not self.flashcards:
+            print("No flashcards to quiz.")
+            return
+
+        flashcard = random.choice(self.flashcards)
+        print(f"Question: {flashcard.question}")
+        user_answer = input("Your answer: ")
+        
+        if user_answer.lower().strip() == flashcard.answer.lower().strip():
+            print("Correct!")
+        else:
+            print(f"Wrong. The correct answer is: {flashcard.answer}")
+
+def main():
+    manager = FlashcardManager()
+    
+    while True:
+        print("Flashcard Program")
+        print("1. Add flashcard")
+        print("2. View flashcards")
+        print("3. Quiz")
+        print("4. Exit")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            question = input("Enter the question: ")
+            answer = input("Enter the answer: ")
+            manager.add_flashcard(question, answer)
+        elif choice == "2":
+            manager.view_flashcards()
+        elif choice == "3":
+            manager.quiz()
+        elif choice == "4":
+            print("Exiting the program.")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if _name_ == "_main_":
+    main()
